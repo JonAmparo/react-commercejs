@@ -2,7 +2,7 @@
   "name": "commerce-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://jonamparo.github.io/react-commercejs/index",
+  "homepage": "https://jonamparo.github.io/react-commercejs/",
   "dependencies": {
     "@chec/commerce.js": "^2.0.1",
     "@testing-library/jest-dom": "^4.2.4",
