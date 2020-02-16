@@ -1,68 +1,352 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<h1 align="center"> Build a commerce application quick & easy using React.js and Commerce.js! </h1>
 
-## Available Scripts
+In this guide, we will setup a [React.js](https://reactjs.org/docs/getting-started.html) and [Commerce.js](https://commercejs.com/) application!
 
-In the project directory, you can run:
+![Project outcome](project.png)
 
-### `npm start`
+In this guide we're using Commerce.js SDK v2
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### View demo
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+[https://jonamparo.github.io/commerce/index](https://jonamparo.github.io/commerce/index)
 
-### `npm test`
+## Overview
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Get your React + Commerce.js application started!
 
-### `npm run build`
+1. Setup your React application
+2. Inject Commerce.js onto your application
+3. Display your Commerce store onto your application
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Requirements
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+- Any Command Line Interface
+- [NPM](https://www.npmjs.com/get-npm) or [Yarn](https://classic.yarnpkg.com/en/docs/install)
+- [Node.js](https://nodejs.org/en/download/), v8+
+- Any code editor
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Prerequisites
 
-### `npm run eject`
+This guide suggests that you have knowledge of the following concepts:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- Some knowledge of React.js, HTML, CSS, and Javascript
+- Some knowledge of how APIs work
+- Some knowledge of the [command line interface](https://www.google.com/search?q=command%20line%20interface)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Project setup
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+In this setup, we'll be using the React.js framework.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### 1. Install React.js
 
-## Learn More
+```
+npx create-react-app commerce-app
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### 2. cd into your project directory
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```
+cd commerce-app
+```
 
-### Code Splitting
+### 3. Install and inject Commerce.js into your app
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+In order to fetch data from the backend, we need to install Commerce.js SDK:
 
-### Analyzing the Bundle Size
+```
+npm install @chec/commerce.js
+```
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+Once that's installed. Navigate into your project and open up the `src/App.js` file with your code editor. Now we can link up our Commerce to our application. Copy and paste the below code into your App.js file.
 
-### Making a Progressive Web App
+**src/App.js**
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+```javascript
+// Import Commerce.js
+import Commerce from '@chec/commerce.js';
 
-### Advanced Configuration
+// Let's get started by creating a new Commerce instance!
+// To get your public key please visit:
+// [https://dashboard.chec.io/setup/developer](https://dashboard.chec.io/setup/developer)
+const commerce = new Commerce('PUBLIC KEY HERE', true);
+```
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+### 4. Fetch the products from your store
 
-### Deployment
+Now that we've entered our [public key](https://dashboard.chec.io/setup/developer) into Commerce instance, we should be connected! Now we can begin to fetch our data from our store! 🥳 If you haven't created your **FREE** account with Commerce.js and added items to your store... What are you waiting for? 🤔 [Begin uploading your product now!](https://dashboard.chec.io/products)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+Once that's completed, delete all the code in your `src/App.js` file. Then you can copy and paste the code below into your codebase. This is a good starter template to begin your commerce project.
 
-### `npm run build` fails to minify
+**src/App.js**
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+```javascript
+import React, { useState, useEffect } from 'react';
+import Commerce from '@chec/commerce.js';
+// Let's get started by creating a new Commerce instance!
+const commerce = new Commerce('PUBLIC KEY HERE', true);
+
+const App = () => {
+  // This variable will hold our products data
+  const [product, setProduct] = useState([]);
+
+  // Fetches data from the Chec API to the "product" variable
+  useEffect(() => {
+    commerce.products.list().then(result => {
+      setProduct(result.data.map(product => product));
+    });
+  }, []);
+
+  console.log('Commerce Product: ', product);
+
+  return <section className='product-list'></section>;
+};
+
+export default App;
+```
+
+### 5. Confirm that your fetch was a success!
+
+Now that we have the code above in our application. Let's check out our store! Let's begin by running:
+
+**a) Start your local enviornment**
+`npm run start`
+
+**b) Open up your Browser DevTools (Console/Inspecter)**
+
+You can open up your DevTools by entering the key combination with your working operating system.
+
+- Windows/Linux `(Ctrl + Shift + i)`
+- MacOS `(Cmd + Shift + i)`
+
+Now that we have our DevTools up, navigate to the "Console" tab. We should see a "Commerce Product" message inside of our console. Expand it and you should see the information to your store. It should look similar to the image below. (See image below)
+
+![Console Image](console.png)
+
+Congratulations! 🥳 Your connection to the store is a success! Now let's use that data that we're retrieving, and display it onto our application.
+
+### OPTIONAL: Add a template styling to your project.
+
+Okay, so you want some pre-made styles? Let's also add some styling, let's go over to our `src/index.css` file and delete everything in there. Now let's copy the code below, and paste it into the `src/index.css` file.
+
+**src/index.css**
+
+```css
+body {
+  margin: 0;
+  background-color: #282c34;
+}
+
+a {
+  text-decoration: none;
+  letter-spacing: 2px;
+}
+
+a:hover {
+  color: cornflowerblue;
+  text-decoration: underline;
+}
+
+.product-list {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-auto-rows: 1fr;
+  grid-column-gap: 0.75rem;
+  grid-row-gap: 1.5rem;
+  padding: 5rem 2.5rem;
+  color: white;
+  text-align: center;
+  flex-wrap: wrap;
+}
+
+@media only screen and (max-width: 1200px) {
+  .product-list {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  .product-list {
+    grid-template-columns: repeat(3, 1fr);
+    padding: 5rem 0.6rem;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .product-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.product {
+  box-shadow: black 0px 0px 5px 0px;
+  transition: transform 0.3s;
+  background-color: #20232a;
+}
+
+.product:hover {
+  transform: scale(1.02);
+}
+
+.product-image {
+  margin: 1rem;
+}
+
+.img {
+  height: 10rem;
+  width: 100%;
+}
+
+.product-detail {
+  margin: 2.5rem 0;
+}
+
+.title {
+  color: cornflowerblue;
+  margin: 0 0.5rem 1rem;
+}
+
+.description {
+  margin: 0.5rem;
+}
+
+.price {
+  color: gray;
+  margin-bottom: 2.5rem;
+}
+
+a.btn {
+  background-color: #f1c65c;
+  color: black;
+  padding: 0.8rem 1.6rem;
+  cursor: pointer;
+  border-color: #f1c65c;
+  color: white;
+  text-decoration: none;
+}
+
+a.btn:hover {
+  background-color: #ad8b34;
+  border-color: #ad8b34;
+  color: white;
+}
+```
+
+😅 Now that we have that in our project! Let's display our data on the client-side.
+
+## 6. Display your product onto your application
+
+Now that we have our data being rendered into our `product` variable. Let's display our products!
+
+**a) Add markup to display the name of our product!**
+
+Inside of our `src/App.js` file, let's add some code to display our store data to the client-side of our application.
+
+**src/App.js**
+(Line 19)
+
+```javascript
+return (
+  <section className='product-list'>
+    {/* Iterate through our product array and return/render it out onto our page */}
+    {product.map((product, index) => (
+      // Product box that holds our product information
+      <div key={index} className='product'>
+        {/* Image of your product */}
+        <div className='product-image'>
+          <img
+            alt={product.name}
+            srcSet={product.media.source}
+            className='img'
+          />
+        </div>
+
+        {/* Product details (name, description, and price) */}
+        <div className='product-detail'>
+          {/* Product name */}
+          <h2 className='title'>{product.name}</h2>
+
+          {/* Product description */}
+          <p className='description'>{product.description}</p>
+
+          {/* Displays price formatted with symbol($10.00) */}
+          <p className='price'>{product.price.formatted_with_symbol}</p>
+        </div>
+      </div>
+    ))}
+  </section>
+);
+```
+
+Yes 🥳! Now we have our data displayed onto the client-side of our application!
+
+## 7. Description fix!
+
+Everything is looking good! Our image is showing, the title is glowing, the description is looking 😱! Oh, no! The description is showing <p> HTML elements! It's okay, we can get that fixed! Let's go back into our `src/App.js` file. On line 9, right below `const [product, setProduct] = useState([]);` , let's add the following code below:
+
+**src/App.js**
+
+```javascript
+// Helper function to express our description into a regular string
+const regex = /(<([^>]+)>)/gi;
+```
+
+Now let's go down to our return statement and look for
+
+```javascript
+<p className='description'>{product.description}</p>
+```
+
+Let's replace that with this:
+
+```javascript
+<p className='description'>
+  {/* Remember we added a helper function at the top of the file? This regex helps render this expression into a regular string without the HTML element tags. */}
+  {product.description.replace(regex, '')}
+</p>
+```
+
+This is a [regex](https://www.regular-expressions.info/) that replaces a special pattern that is within the text. So we made an expression that got rid of the `<p>` element from our description tag. Pretty neat!
+
+## OPTIONAL: Add a buy button and link it to our checkout.
+
+Inside the our `src/App.js` file, below this line `<p className='price'>{product.price.formatted_with_symbol}</p>`. Let's add this code underneath it.
+
+```javascript
+<a href={product.checkout_url.display} className='btn'>
+  Buy now
+</a>
+```
+
+Now we should have a buy button! If we go back to our page and click the button. You'll notice that it'll take us to a checkout page for that item. Awesome!
+
+## Next steps!
+
+Congratulations! 🥳 You've built the client-side of our application successfully! Let's look at the next steps that you could do to extend your application, and have a fully working commerce application!
+
+1. [Add products to cart](https://commercejs.com/docs/examples/add-to-cart.html)
+2. [Retrieve cart contents](https://commercejs.com/docs/examples/retrieve-cart-contents.html)
+3. [Capture a checkout](https://commercejs.com/docs/examples/capture-checkout.html)
+
+## Built With
+
+List all frameworks/tools used.
+
+- [React.js](https://reactjs.org/docs/getting-started.html) - The web framework used
+- [Create React App](https://reactjs.org/docs/create-a-new-react-app.html) - Tool to build my react application
+- HTML5, and CSS - Other languages that I used
+
+## Authors
+
+- **Jonathan Amparo** - [Github](https://github.com/jonamparo) // [Email](mailto:JonathanMAmparo@gmail.com)
+
+## Ending notes
+
+If you would like to contribute or add any feedback to how we can improve the documentation. Please let us know, we're always looking to improve. Thank you.
+
+To join our community, [click here!](https://chec-commercejs-community.herokuapp.com)
+
+Want to check out other documentations, API, blogs, resources and guides? Check out the links below!
+
+[Documentations](https://commercejs.com/docs/) / [Resources](https://commercejs.com/resources/) / [Blogs](https://commercejs.com/blog) / [API](https://commercejs.com/docs/api/#introduction)
+
+Any other guides you would like? [Let us know.](https://chec-commercejs-community.herokuapp.com)
