@@ -1,4 +1,4 @@
-<h1 align="center"> Build a commerce application quick & easy using React.js and Commerce.js! </h1>
+<h1 align="center"> Listing products in a catalog using the using React.js and Commerce.js SDK! </h1>
 
 In this guide, we will setup a [React.js](https://reactjs.org/docs/getting-started.html) and [Commerce.js](https://commercejs.com/) application!
 
@@ -8,7 +8,7 @@ In this guide we're using Commerce.js SDK v2
 
 ### View demo
 
-[https://jonamparo.github.io/react-commercejs/](https://jonamparo.github.io/react-commercejs/)
+[https://jonamparo.github.io/commerce/index](https://jonamparo.github.io/commerce/index)
 
 ## Overview
 
@@ -71,11 +71,19 @@ import Commerce from '@chec/commerce.js';
 const commerce = new Commerce('PUBLIC KEY HERE', true);
 ```
 
+Once the code is in your editor, let's add our [public key](https://dashboard.chec.io/setup/developer) to the code we just entered.
+
+[Get your key](https://dashboard.chec.io/setup/developer)
+
+```javascript
+const commerce = new Commerce('PUBLIC KEY HERE', true);
+```
+
 ### 4. Fetch the products from your store
 
-Now that we've entered our [public key](https://dashboard.chec.io/setup/developer) into Commerce instance, we should be connected! Now we can begin to fetch our data from our store! 🥳 If you haven't created your **FREE** account with Commerce.js and added items to your store... What are you waiting for? 🤔 [Begin uploading your product now!](https://dashboard.chec.io/products)
+Now that we've entered our [public key](https://dashboard.chec.io/setup/developer), we should be properly connected. Now, we can begin to fetch our data from our store. 🥳 If you haven't added items to your store. Make sure to do that. [Click this link to begin uploading your products now](https://dashboard.chec.io/products)!
 
-Once that's completed, delete all the code in your `src/App.js` file. Then you can copy and paste the code below into your codebase. This is a good starter template to begin your commerce project.
+Now that you've uploaded products, let's remove the code in your `src/App.js` so that we have a blank file. Now, let's copy the code below, and paste it into your `src/App.js` file. Note - This is a decend starter template to begin a commerce.js project.
 
 **src/App.js**
 
@@ -104,14 +112,15 @@ const App = () => {
 export default App;
 ```
 
-### 5. Confirm that your fetch was a success!
+**Make sure you still have the public key you entered on your Commerce instance.**
 
-Now that we have the code above in our application. Let's check out our store! Let's begin by running:
+### 5. Confirming that your fetch was a success!
 
-**a) Start your local enviornment**
+Now that we have the code above in our application. Let's check out our store! Let's begin by starting our local enviornment:
+
 `npm run start`
 
-**b) Open up your Browser DevTools (Console/Inspecter)**
+**Open up your Browser DevTools (Console/Inspecter)**
 
 You can open up your DevTools by entering the key combination with your working operating system.
 
@@ -124,9 +133,13 @@ Now that we have our DevTools up, navigate to the "Console" tab. We should see a
 
 Congratulations! 🥳 Your connection to the store is a success! Now let's use that data that we're retrieving, and display it onto our application.
 
-### OPTIONAL: Add a template styling to your project.
+### OPTIONAL: Add styling to your project.
 
-Okay, so you want some pre-made styles? Let's also add some styling, let's go over to our `src/index.css` file and delete everything in there. Now let's copy the code below, and paste it into the `src/index.css` file.
+Let's also add some styling to give the project a nice touch.
+
+1.  Head over to our `src/index.css` file.
+2.  Remove all text from the file.
+3.  Copy the code below, and paste it into the `src/index.css` file.
 
 **src/index.css**
 
@@ -239,7 +252,11 @@ Now that we have our data being rendered into our `product` variable. Let's disp
 
 **a) Add markup to display the name of our product!**
 
-Inside of our `src/App.js` file, let's add some code to display our store data to the client-side of our application.
+Inside of our `src/App.js` file, let's add some code to display our data to our application.
+
+- Go to your `src/App.js` file
+- Remove `return <section className='product-list'></section>`
+- Copy the code below and paste it where you just removed code
 
 **src/App.js**
 (Line 19)
@@ -277,7 +294,7 @@ return (
 );
 ```
 
-Yes 🥳! Now we have our data displayed onto the client-side of our application!
+Et voila! 🥳 Now we have our data displayed onto the client-side of our application!
 
 ## 7. Description fix!
 
@@ -327,15 +344,13 @@ Congratulations! 🥳 You've built the client-side of our application successful
 2. [Retrieve cart contents](https://commercejs.com/docs/examples/retrieve-cart-contents.html)
 3. [Capture a checkout](https://commercejs.com/docs/examples/capture-checkout.html)
 
-## Built With
-
-List all frameworks/tools used.
+## Built with
 
 - [React.js](https://reactjs.org/docs/getting-started.html) - The web framework used
 - [Create React App](https://reactjs.org/docs/create-a-new-react-app.html) - Tool to build my react application
 - HTML5, and CSS - Other languages that I used
 
-## Authors
+## Author
 
 - **Jonathan Amparo** - [Github](https://github.com/jonamparo) // [Email](mailto:JonathanMAmparo@gmail.com)
 
