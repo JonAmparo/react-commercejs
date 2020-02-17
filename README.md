@@ -8,7 +8,7 @@ In this guide we're using Commerce.js SDK v2
 
 ### View demo
 
-[https://jonamparo.github.io/commerce/index](https://jonamparo.github.io/commerce/index)
+[https://jonamparo.github.io/react-commercejs](https://jonamparo.github.io/react-commercejs)
 
 ## Overview
 
